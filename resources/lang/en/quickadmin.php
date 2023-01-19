@@ -16,10 +16,25 @@ return [
 	'back_to_list' => 'Back to list',
 	'dashboard' => 'Dashboard',
 	'delete' => 'Delete',
-	'quickadmin_title' => 'E-Exam',
+	'quickadmin_title' => 'examex',
 
 	'user-management' => [
 		'title' => 'User Management',
+		'fields' => [
+		],
+	],
+	'add-department' => [
+		'title' => 'Add Department',
+		'fields' => [
+		],
+	],
+	'add-course' => [
+		'title' => 'Add Course',
+		'fields' => [
+		],
+	],
+	'price-managment' => [
+		'title' => 'Price Management',
 		'fields' => [
 		],
 	],
@@ -30,6 +45,18 @@ return [
 
 	'roles' => [
 		'title' => 'Roles',
+		'fields' => [
+			'title' => 'Title',
+		],
+	],
+	'price' => [
+		'title' => 'Fix Price',
+		'fields' => [
+			'title' => 'Title',
+		],
+	],
+	'section' => [
+		'title' => 'Add Section',
 		'fields' => [
 			'title' => 'Title',
 		],

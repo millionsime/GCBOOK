@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
-    return redirect('/welcome');
+    return redirect('/home');
 });
 
 // Auth::routes();
@@ -68,6 +68,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     $this->get('/exams/correct/index', 'ExamsController@correct_answer_index')->name('exams.correct_index');
     $this->post('/exams/correct/commit', 'ExamsController@correct_answer_commit')->name('exams.correct_commit');
+   
+    $this->get('/exams/correct/index', 'ExamsController@correct_answer_index')->name('exams.correct_index');
+    $this->post('/exams/correct/commit', 'ExamsController@correct_answer_commit')->name('exams.correct_commit');
 
     $this->get('/exam/{exam_id}',[
         'uses' => 'TestsController@getexam',
@@ -83,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index');
     Route::resource('tests', 'TestsController');
     Route::resource('roles', 'RolesController');
+    Route::resource('departments', 'DepartmentController');
     Route::resource('exams', 'ExamsController');
     Route::resource('subjects', 'SubjectsController');
     Route::post('roles_mass_destroy', ['uses' => 'RolesController@massDestroy', 'as' => 'roles.mass_destroy']);

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\Department;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRolesRequest;
 use App\Http\Requests\UpdateRolesRequest;
 
-class RolesController extends Controller
+class DepartmentController extends Controller
 {
     public function __construct()
     {
@@ -20,9 +21,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $departments = Department::all();
 
-        return view('roles.index', compact('roles'));
+        return view('departments.index', compact('departments'));
     }
 
     /**
@@ -32,7 +33,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        return view('departments.create');
     }
 
     /**
@@ -41,12 +42,13 @@ class RolesController extends Controller
      * @param  \App\Http\Requests\StoreRolesRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRolesRequest $request)
+    public function store(Request $request)
     {
         
-        Role::create($request->all());
+        Department::create($request->all());
 
-        return redirect()->route('roles.index');
+
+        return redirect()->route('departments.index');
     }
 
 
@@ -60,13 +62,13 @@ class RolesController extends Controller
     {
         $role = Role::findOrFail($id);
 
-        return view('roles.edit', compact('role'));
+        return view('departments.edit', compact('role'));
     }
 
     /**
      * Update Role in storage.
      *
-     * @param  \App\Http\Requests\UpdateRolesRequest  $request
+     * @param  \App\Http\Requests\UpdatedepartmentsRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -75,7 +77,7 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->update($request->all());
 
-        return redirect()->route('roles.index');
+        return redirect()->route('departments.index');
     }
 
 
@@ -89,7 +91,7 @@ class RolesController extends Controller
     {
         $role = Role::findOrFail($id);
 
-        return view('roles.show', compact('role'));
+        return view('departments.show', compact('role'));
     }
 
 
@@ -104,7 +106,7 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->delete();
 
-        return redirect()->route('roles.index');
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -122,5 +124,4 @@ class RolesController extends Controller
             }
         }
     }
-
 }

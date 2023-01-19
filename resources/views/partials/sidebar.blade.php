@@ -185,6 +185,48 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-money"></i>
+                    <span class="title">@lang('quickadmin.price-managment.title')</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="{{ $request->segment(1) == 'roles' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('roles.index') }}">
+                            <i class="fa fa-money"></i>
+                            <span class="title">
+                                @lang('quickadmin.price.title')
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-star"></i>
+                    <span class="title">@lang('quickadmin.section.title')</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="{{ $request->segment(1) == 'departments' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('departments.index') }}">
+                            <i class="fa fa-shield"></i>
+                            <span class="title">
+                                @lang('quickadmin.add-department.title')
+                            </span>
+                        </a>
+                    </li>
+                    <li class="{{ $request->segment(1) == 'users' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('users.index') }}">
+                            <i class="fa fa-shield"></i>
+                            <span class="title">
+                                @lang('quickadmin.add-course.title')
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             @endif
             <li>
                 <a href="#logout" onclick="$('#logout').submit();">
