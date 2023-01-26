@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.roles.title')</h3>
+    <h3 class="page-title">Departments</h3>
 
     <p>
-        <a href="{{ route('departments.create') }}" class="btn btn-success"> Add new Department</a>
+        <a href="{{ route('departments.create') }}" class="btn btn-success"> Add New Department</a>
     </p>
 
     <div class="panel panel-default">

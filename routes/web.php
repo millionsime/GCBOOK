@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('roles', 'RolesController');
     Route::resource('departments', 'DepartmentController');
     Route::resource('exams', 'ExamsController');
+    Route::resource('courses', 'CoursesController');
     Route::resource('subjects', 'SubjectsController');
     Route::post('roles_mass_destroy', ['uses' => 'RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'UsersController');

@@ -217,8 +217,8 @@
                             </span>
                         </a>
                     </li>
-                    <li class="{{ $request->segment(1) == 'users' ? 'active active-sub' : '' }}">
-                        <a href="{{ route('users.index') }}">
+                    <li class="{{ $request->segment(1) == 'exams' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('exams.create') }}">
                             <i class="fa fa-shield"></i>
                             <span class="title">
                                 @lang('quickadmin.add-course.title')
