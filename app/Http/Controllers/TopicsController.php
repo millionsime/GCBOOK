@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Topic;
+use App\Department;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTopicsRequest;
 use App\Http\Requests\UpdateTopicsRequest;
-USE Auth;
 
 class TopicsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('teacher');
+        $this->middleware('admin');
     }
 
     /**
@@ -34,7 +36,9 @@ class TopicsController extends Controller
      */
     public function create()
     {
-        return view('topics.create');
+        $departments = Department::all();
+
+        return view('topics.create', compact('departments'));
     }
 
     /**
@@ -47,6 +51,7 @@ class TopicsController extends Controller
     {
         //Topic::create($request->all());
         $currentTopic =  new Topic;
+        $currentTopic->department_id = $request['department'];
         $currentTopic->title = $request['title'];
         $currentTopic->teacher_id = Auth::user()->id;
         $currentTopic->save();
@@ -65,8 +70,10 @@ class TopicsController extends Controller
     public function edit($id)
     {
         $topic = Topic::findOrFail($id);
+        $departments = Department::all();
 
-        return view('topics.edit', compact('topic'));
+        return view('topics.edit', compact(['topic', 'departments']));
+       
     }
 
     /**
@@ -79,7 +86,9 @@ class TopicsController extends Controller
     public function update(UpdateTopicsRequest $request, $id)
     {
         $topic = Topic::findOrFail($id);
-        $topic->update($request->all());
+        $topic->title = $request->title;
+        $topic->department_id = $request->department;
+        $topic->save();
 
         return redirect()->route('topics.index');
     }

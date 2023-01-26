@@ -5,7 +5,7 @@
 
     <p>
         <a href="{{ route('questions.create') }}" class="btn btn-success">@lang('quickadmin.add_new_mc')</a>
-        <a href="{{ route('QuestionEssay.essay_create') }}" class="btn btn-success"> @lang('quickadmin.add_new_essay')  </a>
+        {{-- <a href="{{ route('QuestionEssay.essay_create') }}" class="btn btn-success"> @lang('quickadmin.add_new_essay')  </a> --}}
     </p>
 
     <div class="panel panel-default">

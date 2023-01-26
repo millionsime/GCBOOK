@@ -1,8 +1,9 @@
 <?php
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Department;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Topic
@@ -36,6 +37,10 @@ class Topic extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id')->withTrashed();
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id')->withTrashed();
     }
 
     public function topic()

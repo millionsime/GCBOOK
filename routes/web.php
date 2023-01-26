@@ -1,8 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Route;
+// Route::get('/', function () {
+//     return redirect('/home');
+// });
 Route::get('/', function () {
-    return redirect('/home');
-});
+    return view('welcome');
+})->name('welcome');
 
 // Auth::routes();
 
@@ -36,6 +39,7 @@ Route::group(['middleware' => ['admin', 'teacher']], function () {
    Route::get('/welcome', 'HomeController@index');
    Route::resource('tests', 'TestsController');
    Route::resource('roles', 'RolesController');
+   Route::resource('sells', 'SellsController');
    Route::post('roles_mass_destroy', ['uses' => 'RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
    Route::resource('users', 'UsersController');
    Route::post('users_mass_destroy', ['uses' => 'UsersController@massDestroy', 'as' => 'users.mass_destroy']);
@@ -84,11 +88,24 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/home', 'HomeController@index');
+
+    $this->get('/student-form', 'StudentController@index');
+    $this->post('/store-input-fields', 'StudentController@store');
+    $this->get('products/create-step-one', 'ProductController@createStepOne')->name('products.create.step.one');
+    $this->post('products/create-step-one', 'ProductController@postCreateStepOne')->name('products.create.step.one.post');
+    $this->get('products/create-step-two', 'ProductController@createStepTwo')->name('products.create.step.two');
+    $this->post('products/create-step-two', 'ProductController@postCreateStepTwo')->name('products.create.step.two.post');
+    $this->get('products/create-step-three', 'ProductController@createStepThree')->name('products.create.step.three');
+    $this->post('products/create-step-three', 'ProductController@postCreateStepThree')->name('products.create.step.three.post');
+
+    
+
+    Route::resource('products', 'ProductController');
     Route::resource('tests', 'TestsController');
     Route::resource('roles', 'RolesController');
     Route::resource('departments', 'DepartmentController');
-    Route::resource('exams', 'ExamsController');
     Route::resource('courses', 'CoursesController');
+    Route::resource('exams', 'ExamsController');
     Route::resource('subjects', 'SubjectsController');
     Route::post('roles_mass_destroy', ['uses' => 'RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'UsersController');
@@ -96,8 +113,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user_actions', 'UserActionsController');
     Route::resource('topics', 'TopicsController');
     Route::post('topics_mass_destroy', ['uses' => 'TopicsController@massDestroy', 'as' => 'topics.mass_destroy']);
+    Route::resource('courses', 'CoursesController');
+    Route::post('courses_mass_destroy', ['uses' => 'CoursesController@massDestroy', 'as' => 'topics.mass_destroy']);
+   
     Route::resource('questions', 'QuestionsController');
+    Route::post('store-questions_for_good', 'QuestionsController@store');
     Route::post('questions_mass_destroy', ['uses' => 'QuestionsController@massDestroy', 'as' => 'questions.mass_destroy']);
+   
     Route::resource('questions_options', 'QuestionsOptionsController');
     Route::post('questions_options_mass_destroy', ['uses' => 'QuestionsOptionsController@massDestroy', 'as' => 'questions_options.mass_destroy']);
     Route::resource('results', 'ResultsController');

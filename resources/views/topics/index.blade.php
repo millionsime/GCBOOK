@@ -4,7 +4,7 @@
     <h3 class="page-title">@lang('quickadmin.topics.title')</h3>
 
     <p>
-        <a href="{{ route('topics.create') }}" class="btn btn-success">Add new Subject</a>
+        <a href="{{ route('topics.create') }}" class="btn btn-success">Addtopic Subject</a>
     </p>
 
     <div class="panel panel-default">
@@ -17,7 +17,8 @@
                 <thead>
                     <tr>
                         <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
-                        <th>@lang('quickadmin.topics.fields.title')</th>
+                        <th>Course Name</th>
+                        <th>Department</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -29,6 +30,7 @@
                             <tr data-entry-id="{{ $topic->id }}">
                                 <td></td>
                                 <td>{{ $topic->title }}</td>
+                                <td>{{ $topic->department->title }}</td>
                                 <td>
                                     <a href="{{ route('topics.show',[$topic->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.view')</a>
                                     <a href="{{ route('topics.edit',[$topic->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.edit')</a>

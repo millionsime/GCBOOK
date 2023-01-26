@@ -24,18 +24,18 @@
                 
                 <tbody>
                     @if (count($departments) > 0)
-                        @foreach ($departments as $role)
-                            <tr data-entry-id="{{ $role->id }}">
+                        @foreach ($departments as $department)
+                            <tr data-entry-id="{{ $department->id }}">
                                 <td></td>
-                                <td>{{ $role->title }}</td>
+                                <td>{{ $department->title }}</td>
                                 <td>
-                                    <a href="{{ route('departments.show',[$role->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.view')</a>
-                                    <a href="{{ route('departments.edit',[$role->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.edit')</a>
+                                    <a href="{{ route('departments.show',[$department->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.view')</a>
+                                    <a href="{{ route('departments.edit',[$department->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.edit')</a>
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("quickadmin.are_you_sure")."');",
-                                        'route' => ['roles.destroy', $role->id])) !!}
+                                        'route' => ['departments.destroy', $department->id])) !!}
                                     {!! Form::submit(trans('quickadmin.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 </td>

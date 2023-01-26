@@ -13,6 +13,12 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    
+                    <select  name="department"  id="" class="form-control">
+                        @foreach($departments as $department) 
+                    <option value= "{{ $department->id }}" @if($topic->department_id == $department->id) selected @endif> {{ $department->title }} </option>
+                        @endforeach
+                    </select>
                     {!! Form::label('title', 'Title*', ['class' => 'control-label']) !!}
                     {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>

@@ -60,7 +60,7 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::findOrFail($id);
+        $role = Department::findOrFail($id);
 
         return view('departments.edit', compact('role'));
     }
@@ -72,9 +72,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRolesRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $role = Role::findOrFail($id);
+        $role = Department::findOrFail($id);
         $role->update($request->all());
 
         return redirect()->route('departments.index');
@@ -89,7 +89,7 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        $role = Role::findOrFail($id);
+        $role = Department::findOrFail($id);
 
         return view('departments.show', compact('role'));
     }
@@ -103,7 +103,7 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $role = Role::findOrFail($id);
+        $role = Department::findOrFail($id);
         $role->delete();
 
         return redirect()->route('departments.index');
@@ -117,7 +117,7 @@ class DepartmentController extends Controller
     public function massDestroy(Request $request)
     {
         if ($request->input('ids')) {
-            $entries = Role::whereIn('id', $request->input('ids'))->get();
+            $entries = Department::whereIn('id', $request->input('ids'))->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();

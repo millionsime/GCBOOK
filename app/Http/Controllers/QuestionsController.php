@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\Topic;
 use App\Question;
 use App\QuestionEssay;
 use App\QuestionsOption;
+
 use Illuminate\Http\Request;
+use App\Imports\QuestionImport;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreQuestionsRequest;
 use App\Http\Requests\UpdateQuestionsRequest;
-use Auth;
-use DB;
+
 
 class QuestionsController extends Controller
 {
@@ -38,24 +43,9 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-        $user_id = Auth::user()->id;
-        $teacher_exams = DB::select("SELECT e.id, e.exam_date, e.exam_type, t.title FROM exams e JOIN topics t ON t.id = e.subject_id Where t.teacher_id = '$user_id'");
-        $exams = collect($teacher_exams);
-
-        $relations = [
-            'topics' => \App\Topic::where('teacher_id', Auth::user()->id)->pluck('title', 'id')->prepend('Please select', ''),
-            'exams' => collect($teacher_exams)->pluck('exam_type', 'id')->prepend('Please select', ''),
-        ];
-
-        $correct_options = [
-            'option1' => 'Option #1',
-            'option2' => 'Option #2',
-            'option3' => 'Option #3',
-            'option4' => 'Option #4',
-            'option5' => 'Option #5'
-        ];
-
-        return view('questions.create', compact(['correct_options']) + $relations);
+        
+        $topics = Topic::all();
+        return view('questions.create', compact(['topics']));
     }
 
     public function createEssayQ()
@@ -78,27 +68,13 @@ class QuestionsController extends Controller
      * @param  \App\Http\Requests\StoreQuestionsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreQuestionsRequest $request)
+    public function store(Request $request)
     {
         //dd($request['exam_id']);
 
-        $question = Question::create($request->all());
-
-        foreach ($request->input() as $key => $value) {
-            if(strpos($key, 'option') !== false && $value != '') {
-                $status = $request->input('correct') == $key ? 1 : 0;
-                QuestionsOption::create([
-                    'question_id' => $question->id,
-                    'option'      => $value,
-                    'correct'     => $status
-                ]);
-            }
-        }
-
-        $question_1 = Question::find($question->id);
-        $question_1->type = true;
-        $question_1->save();
-
+        //dd($request->topic);
+        $path = $request->file('files')->getRealPath();
+        Excel::import(new QuestionImport($request->topic), $path);
         return redirect()->route('questions.index');
     }
 

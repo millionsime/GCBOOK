@@ -11,201 +11,125 @@ use App\QuestionEssay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreTopicsRequest;
+use App\Http\Requests\UpdateTopicsRequest;
 use App\Http\Requests\StoreQuestionsRequest;
 use App\Http\Requests\UpdateQuestionsRequest;
 
 class CoursesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     /**
-     * Display a listing of Question.
+     * Display a listing of Topic.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $teacher_exams = DB::select("SELECT e.id, e.exam_date, e.exam_type, t.title FROM exams e JOIN topics t ON t.id = e.subject_id Where t.teacher_id = '$user_id'");
-        $exams = collect($teacher_exams);
+        $topics = Topic::all();
 
-        return view('exams.index', compact('exams'));
+        return view('topics.index', compact('topics'));
     }
 
-    public function student_index()
-    {
-         $student_id = Auth::id();
-         $exams = DB::select("Select exam.id, exam.exam_date, exam.exam_type, topic.title 
-                              FROM exams exam 
-                              Join attendencs ON attendencs.topic_id = exam.subject_id 
-                              Join topics topic ON topic.id = attendencs.topic_id 
-                              Where attendencs.student_id = '$student_id' 
-                              and exam.id not in (SELECT exam_id FROM marks where student_id = '$student_id' )");
-
-         return view('exams.student_index', compact('exams'));
-    }
-
-
-
-    public function correct_answer_index(){
-
-        $essays_questions = TestAnswer::where([['essay_answer','<>', null], ['given_mark',null]])
-            ->whereIn('question_id', Question::where('type', false)->pluck('id'))->get();
-
-
-        $essays_questions->map(function ($answer) {
-            $answer['topic'] = Topic::find(Question::find($answer->question_id)->topic_id)->title;
-            $answer['exam_type'] = Exam::find(Question::find($answer->question_id)->exam_id)->exam_type;
-            $answer['exam_date'] = Exam::find(Question::find($answer->question_id)->exam_id)->exam_date;
-            $answer['student_name'] = User::find($answer->user_id)->name;
-            $answer['question'] = Question::find($answer->question_id)->question_text;
-            return $answer;
-        });
-
-
-        return view('exams.exams_correct_index', compact('essays_questions'));
-    }
-
-
-    public function correct_answer_create($answer_id){
-        $student_answer = TestAnswer::find($answer_id);
-
-        $student_answer['student_name'] = User::find($student_answer->user_id)->name;
-        $student_answer['question'] = Question::find($student_answer->question_id)->question_text;
-        $student_answer['question_grade'] = Question::find($student_answer->question_id)->grade;
-        //dd($student_answer);
-        return view('exams.exams_correct_create', compact('student_answer'));
-    }
-
-    public function correct_answer_commit(Request $request){
-
-        $student_answer = TestAnswer::find($request->questions_id);
-        $student_answer->given_mark = $request->grade;
-        $student_answer->teacher_feedback = $request->Feedback;
-        $student_answer->save();
-
-        return redirect()->route('exams.correct_index');
-    }
     /**
-     * Show the form for creating new Question.
+     * Show the form for creating new Topic.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $all_topics = Topic::where('teacher_id', Auth::user()->id);
-
-
-        $relations = [
-            'topics' => $all_topics->pluck('title', 'id')->prepend('Please select', ''),
-        ];
-
-        return view('exams.create', $relations);
+        return view('topics.create');
     }
 
-
     /**
-     * Store a newly created Question in storage.
+     * Store a newly created Topic in storage.
      *
-     * @param  \App\Http\Requests\StoreQuestionsRequest  $request
+     * @param  \App\Http\Requests\StoreTopicsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTopicsRequest $request)
     {
+        //Topic::create($request->all());
+        $currentTopic =  new Topic;
+        $currentTopic->title = $request['title'];
+        $currentTopic->teacher_id = Auth::user()->id;
+        $currentTopic->save();
+        //$user = User::create(request(['name', 'email', 'password']));
 
-        $currentexam =  new Exam;
-        $currentexam->subject_id = $request['topic_id'];
-        $currentexam->exam_date = $request['exam_date'];
-        $currentexam->exam_type = $request['exam_type'];
-        $currentexam->save();
-
-
-        return redirect()->route('exams.index');
-    }
-
-    public function storeEssayQ(StoreQuestionsRequest $request)
-    {
-
-        $question = QuestionEssay::create($request->all());
-
-
-        return redirect()->route('questions.index');
+        return redirect()->route('topics.index');
     }
 
 
     /**
-     * Show the form for editing Question.
+     * Show the form for editing Topic.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $relations = [
-            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
-        ];
+        $topic = Topic::findOrFail($id);
 
-        $question = Question::findOrFail($id);
-
-        return view('questions.edit', compact('question') + $relations);
+        return view('topics.edit', compact('topic'));
     }
 
     /**
-     * Update Question in storage.
+     * Update Topic in storage.
      *
-     * @param  \App\Http\Requests\UpdateQuestionsRequest  $request
+     * @param  \App\Http\Requests\UpdateTopicsRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateQuestionsRequest $request, $id)
+    public function update(UpdateTopicsRequest $request, $id)
     {
-        $question = Question::findOrFail($id);
-        $question->update($request->all());
+        $topic = Topic::findOrFail($id);
+        $topic->update($request->all());
 
-        return redirect()->route('questions.index');
+        return redirect()->route('topics.index');
     }
 
 
     /**
-     * Display Question.
+     * Display Topic.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        $topic = Topic::findOrFail($id);
 
-        $relations = [
-            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
-        ];
-
-        $question = Question::findOrFail($id);
-
-        return view('questions.show', compact('question') + $relations);
+        return view('topics.show', compact('topic'));
     }
 
 
     /**
-     * Remove Question from storage.
+     * Remove Topic from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $question = Question::findOrFail($id);
-        $question->delete();
+        $topic = Topic::findOrFail($id);
+        $topic->delete();
 
-        return redirect()->route('questions.index');
+        return redirect()->route('topics.index');
     }
 
     /**
-     * Delete all selected Question at once.
+     * Delete all selected Topic at once.
      *
      * @param Request $request
      */
     public function massDestroy(Request $request)
     {
         if ($request->input('ids')) {
-            $entries = Question::whereIn('id', $request->input('ids'))->get();
+            $entries = Topic::whereIn('id', $request->input('ids'))->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();

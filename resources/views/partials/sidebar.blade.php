@@ -56,48 +56,7 @@
             @endif
 
             @if(Auth::user()->isTeacher())
-
-                    <li class="{{ $request->segment(1) == 'exams' ? 'active' : '' }}">
-                        <a href="#">
-                            <i class="fa fa-gears"></i>
-                            <span class="title"> Exams </span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-
-
-                            <li class="{{ $request->segment(1) == 'exams' ? 'active active-sub' : '' }}">
-                                <a href="{{ route('exams.index') }}">
-                                    <i class="fa fa-gears"></i>
-                                    <span class="title"> Show Exams </span>
-                                </a>
-                            </li>
-
-                            <li class="{{ $request->segment(1) == 'exams' ? 'active active-sub' : '' }}">
-                                <a href="{{ route('exams.create') }}">
-                                    <i class="fa fa-gears"></i>
-                                    <span class="title"> Add new Exam </span>
-                                </a>
-                            </li>
-
-                            <li class="{{ $request->segment(1) == 'exams' ? 'active active-sub' : '' }}">
-                                <a href="{{ route('exams.correct_index') }}">
-                                    <i class="fa fa-gears"></i>
-                                    <span class="title"> Correct Exams </span>
-                                </a>
-                            </li>
-
-                        </ul>
-
-
-
-
-                    <li class="{{ $request->segment(1) == 'topics' ? 'active' : '' }}">
-                        <a href="{{ route('topics.index') }}">
-                            <i class="fa fa-gears"></i>
-                            <span class="title">@lang('quickadmin.topics.title')</span>
-                        </a>
-                    </li>
+                    
                     <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}">
                         <a href="#">
                             <i class="fa fa-gears"></i>
@@ -107,19 +66,9 @@
                         <ul class="sub-menu">
 
                             <li class="{{ $request->segment(1) == 'users' ? 'active active-sub' : '' }}">
-                                <a href="{{ route('questions.create') }}">
+                                <a href="{{ route('questions.index') }}">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title">
-                                @lang('quickadmin.questions.add-new-MC')
-                            </span>
-                                </a>
-                            </li>
-
-                            <li class="{{ $request->segment(1) == 'users' ? 'active active-sub' : '' }}">
-                                <a href="{{ route('QuestionEssay.essay_create') }}">
-                                    <i class="fa fa-plus"></i>
-                                    <span class="title">
-                                @lang('quickadmin.questions.add-new-essay')
+                                    <span class="title">Add Question
                             </span>
                                 </a>
                             </li>
@@ -132,20 +81,26 @@
                             </span>
                                 </a>
                             </li>
-
-
-
                         </ul>
-
-
-
-
-
                     </li>
+                        
                     <li class="{{ $request->segment(1) == 'questions_options' ? 'active' : '' }}">
                         <a href="{{ route('questions_options.index') }}">
                             <i class="fa fa-gears"></i>
                             <span class="title">@lang('quickadmin.questions-options.title')</span>
+                        </a>
+                    </li>
+                    <li class="{{ $request->segment(1) == 'sells' ? 'active' : '' }}">
+                        <a href="{{ route('sells.index') }}">
+                            <i class="fa fa-money"></i>
+                            <span class="title">Track Sells</span>
+                        </a>
+                    </li>
+                    <li class="{{ $request->segment(1) == 'roles' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('questions.index') }}">
+                            <i class="fa fa-list"></i>
+                            <span class="title"> View Sells Trafic
+                    </span>
                         </a>
                     </li>
 
@@ -205,7 +160,7 @@
             <li>
                 <a href="#">
                     <i class="fa fa-star"></i>
-                    <span class="title">@lang('quickadmin.section.title')</span>
+                    <span class="title">Sectios</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="sub-menu">
@@ -213,20 +168,22 @@
                         <a href="{{ route('departments.index') }}">
                             <i class="fa fa-shield"></i>
                             <span class="title">
-                                @lang('quickadmin.add-department.title')
+                                Departments
                             </span>
                         </a>
                     </li>
-                    <li class="{{ $request->segment(1) == 'exams' ? 'active active-sub' : '' }}">
-                        <a href="{{ route('exams.create') }}">
+                    <li class="{{ $request->segment(1) == 'topics' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('topics.index') }}">
                             <i class="fa fa-shield"></i>
                             <span class="title">
-                                @lang('quickadmin.add-course.title')
+                                courses
                             </span>
                         </a>
                     </li>
                 </ul>
+                
             </li>
+           
             @endif
             <li>
                 <a href="#logout" onclick="$('#logout').submit();">

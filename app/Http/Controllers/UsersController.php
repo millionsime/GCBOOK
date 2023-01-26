@@ -38,7 +38,7 @@ class UsersController extends Controller
         $relations = [
             'roles' => \App\Role::get()->pluck('title', 'id')->prepend('Please select', ''),
         ];
-
+        
         return view('users.create', $relations);
     }
 
@@ -48,7 +48,7 @@ class UsersController extends Controller
      * @param  \App\Http\Requests\StoreUsersRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUsersRequest $request)
+    public function store(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
@@ -56,6 +56,7 @@ class UsersController extends Controller
         ]);
 
         if(!$validator->fails()){
+         
             User::create($request->all());
         }
 

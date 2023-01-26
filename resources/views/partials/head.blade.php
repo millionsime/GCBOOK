@@ -17,8 +17,7 @@
       href="{{ url('quickadmin/css') }}/font-awesome.min.css"/>
 <link rel="stylesheet"
       href="{{ url('quickadmin/css') }}/bootstrap.min.css"/>
-<link rel="stylesheet"
-      href="{{ url('quickadmin/css') }}/components.css"/>
+
 <link rel="stylesheet"
       href="{{ url('quickadmin/css') }}/quickadmin-layout.css"/>
 <link rel="stylesheet"
