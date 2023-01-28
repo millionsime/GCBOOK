@@ -1,81 +1,52 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('YAI BLOG POST', 'YAI BLOG POST') }}</title>
-
+    @include('partials.head')
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <!-- Page level plugin CSS-->
+ 
+ <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<body class="page-header-fixed">
 
-                    <!-- Branding Image -->
-                   
-                    <div><img src="/svg/yai.png" style="height: 25px; border-right:1px solid #333;" class="pl-13"></div>
-                </div class="pl-3 pt-1 pt-20">YAI BLOG POST</div>
+    {!! Form::open(['method' => 'GET', 'route' => ['welcome.show', $departments->id]]) !!} 
 
+<div class="panel panel-default">
+    <div class="panel-heading">
+            @lang('Select Your Department')
+        </div>
+        
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <select name="department"  id="" class="form-control">
+                        @foreach($departments as $department) 
+                    <option value= "{{ $department->id }}"> {{ $department->title }} </option>
+                        @endforeach
+                    </select>
+                    {!! Form::submit(trans('Go'), ['class' => 'btn btn-save']) !!}
+                    {!! Form::close() !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('title'))
+                        <p class="help-block">
+                            {{ $errors->first('title') }}
+                        </p>
+                    @endif
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href=#>Login</a></li>
-                            <li><a href=#>Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
+            </div>   
     </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+   
+
 </body>
 </html>

@@ -1,10 +1,12 @@
 <?php
+use App\Topic;
 use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return redirect('/home');
 // });
 Route::get('/', function () {
-    return view('welcome');
+    $departments = Topic::all();
+    return view('welcome', compact('departments'));
 })->name('welcome');
 
 // Auth::routes();
@@ -36,7 +38,7 @@ Route::group(['middleware' => ['admin', 'teacher']], function () {
 
    $this->get('/questions/create_Essay_Question', 'QuestionsController@createEssayQ')->name('questions.essay_create');
    $this->post('/questions/store_Essay_Question', 'QuestionsController@storeEssayQ')->name('questions.essay_store');
-   Route::get('/welcome', 'HomeController@index');
+   Route::get('/home', 'HomeController@index');
    Route::resource('tests', 'TestsController');
    Route::resource('roles', 'RolesController');
    Route::resource('sells', 'SellsController');
@@ -100,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     
 
+    Route::resource('welcome', 'WelcomeController');
     Route::resource('products', 'ProductController');
     Route::resource('tests', 'TestsController');
     Route::resource('roles', 'RolesController');
