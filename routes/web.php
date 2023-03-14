@@ -1,19 +1,36 @@
 <?php
+use App\User;
 use App\Topic;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-// Route::get('/', function () {
-//     return redirect('/home');
-// });
+
+Route::get('/', function () {
+    return redirect('/home');
+});
 Route::get('/', function () {
     $departments = Topic::all();
     return view('welcome', compact('departments'));
 })->name('welcome');
 
+Route::get('front-question/{id}', function($id){
+
+    return view('front.front_question', compact('id'));
+});
+
+
+Route::get('log', function(){
+    $user = User::find(1);
+    Auth::login($user);
+});
+
 // Auth::routes();
 
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-$this->post('login', 'Auth\LoginController@login')->name('auth.login');
+//$this->post('login', 'Auth\LoginController@login')->name('auth.login');
+
+Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@login']);
+
 $this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
 $this->get('oauth2google', 'Auth\Oauth2Controller@oauth2google')->name('oauth2google');
 $this->get('googlecallback', 'Auth\Oauth2Controller@googlecallback')->name('googlecallback');
