@@ -25,8 +25,8 @@
                   
                     {!! Form::open(['method' => 'POST', 'route' => ['savelastword']]) !!} 
                                       @csrf()
-                                      {!! Form::label('typetitle', 'Add Last word*', ['class' => 'control-label']) !!}
-                                      {!! Form::text('last_word',  old('last_word'), ['class' => 'form-control', 'placeholder' => 'write your last word', 'id'=>'demo']) !!}
+                                      {!! Form::label('typetitle', ' Add Last word*', ['class' => 'control-label fa fa-upload']) !!}
+                                      {!! Form::text('last_word',  old('last_word'), ['class' => 'form-control fa', 'placeholder' => 'write your last word', 'id'=>'demo']) !!}
                 </div>
             </div>
         </div>

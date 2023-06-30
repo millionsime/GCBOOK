@@ -71,6 +71,11 @@ class GcBookController extends Controller
 
     public function save(Request $request){
 
+        $validated = $request->validate([
+            'last_word' => 'required|max:30',
+        ]); 
+
+        $prelast = Prelastword::all();
         $lastword_check =Lastword::where('user_id', Auth::user()->id)->exists();
         $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();
         $lastword =  new Lastword;
@@ -81,7 +86,7 @@ class GcBookController extends Controller
     {
         $lastword =Lastword::where('user_id', Auth::user()->id)->first();
         $lw =Lastword::where('user_id', Auth::user()->id)->first();
-        return view('gcbooks.lastword', compact('gcbook_check_stat','lw','lastword_check', 'lastword'));
+        return view('gcbooks.lastword', compact('prelast','gcbook_check_stat','lw','lastword_check', 'lastword'));
     }
     else{
        $lastword->save();
