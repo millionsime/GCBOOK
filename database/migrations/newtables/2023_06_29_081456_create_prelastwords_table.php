@@ -13,7 +13,7 @@ class CreatePreLastwordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pre_lastwords', function (Blueprint $table) {
+        Schema::create('prelastwords', function (Blueprint $table) {
             $table->id();
             $table->string('lastword', 30);
             $table->timestamps();

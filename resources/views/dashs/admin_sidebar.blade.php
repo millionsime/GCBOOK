@@ -56,11 +56,27 @@
                 <h6 class="collapse-header">Manage Adminstrations:</h6>
                 <a class="collapse-item" href="{{ route('colleges.index') }}">Add College</a>
                 <a class="collapse-item" href="{{ route('departments.index') }}">Add Department</a>
-              
-                
+                <a class="collapse-item" href="{{ route('prelastword') }}">Add Lastword</a>
             </div>
         </div>
     </li>
+    <!-- LastWords -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities3"
+            aria-expanded="true" aria-controls="collapseUtilities2">
+            <i class="fas fa-fw fa-file"></i>
+            <span>GC Book</span>
+        </a>
+        <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Manage Lastwords:</h6>
+                <a class="collapse-item" href="{{ route('prelastword') }}">Add Lastword</a>
+            </div>
+        </div>
+    </li>
+    <!-- -->
+
     <!-- Divider -->
     <hr class="sidebar-divider">
     <div class="sidebar-heading">

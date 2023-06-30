@@ -9,6 +9,7 @@ use App\Result;
 use App\Department;
 use App\College;
 use App\QuestionsOption;
+use App\Prelastword;
 use Illuminate\Support\Facades\Route;
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
@@ -236,6 +237,8 @@ Route::get('/taketest/{id}', function($id)
     Route::get('request_gc_book', 'GcBookController@index')->name('request_gc_book');
     Route::post('gcbook', 'GcBookController@store')->name('gcbook');
     Route::resource('lastwords', 'LastwordController');
+    Route::get('prelastword', 'PrelastwordController@index')->name('prelastword');
+    Route::post('saveprelastword', 'PrelastwordController@save')->name('saveprelastword');
     Route::get('uploadprofpic', 'UploadpictureController@updt_profile')->name('uploadprofpic');
     Route::post('profilestore', 'UploadpictureController@store')->name('profilestore');
     Route::get('updateprofile/{id}', 'UploadpictureController@update_profile')->name('updateprofile');
