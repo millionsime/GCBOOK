@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Prelastword extends Model
 {
-    use SoftDeletes;
 
     protected $fillable = ['lastword'];
 

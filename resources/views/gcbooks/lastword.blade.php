@@ -73,26 +73,13 @@
     <div class="card-body p-0 m-2">
         <h3> Suggestions</h3>
         <div class="ml-2">
-            <span class="ml-2 mr-2" onclick="myFunction('Hulu bersu hone')" style="cursor: pointer;" >hulu bersu hone</span>
-            <span class="muted ml-2 mr-2">hulu bersu hone</span>
-            <span class="muted ml-2 mr-2">hulu bersu hone</span>
-            <span class="muted ml-2 mr-2">hulu bersu hone</span>
-            <span class="muted ml-2 mr-2" onclick="myFunction('Insha Allah!')" style="cursor: pointer;" >Insha Allah</span>
-            <span class="muted ml-2 mr-2">Insha Allah</span>
-            <span class="muted ml-2 mr-2">Insha Allah</span>
-            <span class="muted ml-2 mr-2">hulu bersu hone</span>
+            <span class="ml-2 mr-2" onclick="myFunction('{{$prelast->lastword}}')" style="cursor: pointer;" >{{ $prelast->lastword }}</span>
         </div>
-        <div class="ml-2">
-            <span class="muted ml-2 mr-2" onclick="myFunction('Thanks Mom next God!')" style="cursor: pointer;" >Thanks Mom next God!</span>
-            <span class="muted ml-2 mr-2" >hulu bersu hone</span>
-            <span class="muted ml-2 mr-2" onclick="myFunction('Done')" style="cursor: pointer;" >Done</span>
-            <span class="muted ml-2 mr-2" onclick="myFunction('Thanks Almighty!')" style="cursor: pointer;" >Thanks Almighty!</span>
 <script>
 function myFunction(values) {
   document.getElementById("demo").value = values;
 }
 </script>
-        </div>
     </div>
 </div>
 @stop

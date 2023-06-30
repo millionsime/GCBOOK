@@ -7,6 +7,7 @@ use DB;
 use Auth;
 use App\GcBook;
 use App\Lastword;
+use App\Prelastword;
 
 class GcBookController extends Controller
 {
@@ -61,10 +62,11 @@ class GcBookController extends Controller
        
     public function addlastword(Request $request, $id)
         {
+            $prelast = Prelastword::all()->first();
             $gcbook_check_stat= GCBook::where('user_id', $id)->first();
             $lw =Lastword::where('user_id', Auth::user()->id)->first();
             $lastword_check =Lastword::where('user_id', $id)->exists();
-            return view("gcbooks.lastword", compact('gcbook_check_stat', 'lw','lastword_check')); 
+            return view("gcbooks.lastword", compact('prelast','gcbook_check_stat', 'lw','lastword_check')); 
         }
 
     public function save(Request $request){

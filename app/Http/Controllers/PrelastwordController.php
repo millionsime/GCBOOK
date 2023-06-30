@@ -13,7 +13,7 @@ class PrelastwordController extends Controller
 
     public function save(Request $request){
         $validated = $request->validate([
-            'lastword' => 'unique:prelastwords|max:30',
+            'lastword' => 'required|unique:prelastwords|max:30',
             
         ]);
         $prelast = new Prelastword;
