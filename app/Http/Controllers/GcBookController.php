@@ -62,7 +62,7 @@ class GcBookController extends Controller
        
     public function addlastword(Request $request, $id)
         {
-            $prelast = Prelastword::all()->first();
+            $prelast = Prelastword::all();
             $gcbook_check_stat= GCBook::where('user_id', $id)->first();
             $lw =Lastword::where('user_id', Auth::user()->id)->first();
             $lastword_check =Lastword::where('user_id', $id)->exists();
@@ -94,12 +94,13 @@ class GcBookController extends Controller
 
     public function update(Request $request, $id)
     {
+        $prelast = Prelastword::all();
         $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();
         $lw = Lastword::findOrFail($id);
         $lw->update($request->all());
         $lw =Lastword::where('user_id', Auth::user()->id)->first();
         $lastword_check =Lastword::where('user_id', Auth::user()->id)->exists();
-        return view('gcbooks.lastword', compact('gcbook_check_stat', 'lastword_check','lw'))->with("lastwordupdated", "Last word updated Successfully"); 
+        return view('gcbooks.lastword', compact('prelast','gcbook_check_stat', 'lastword_check','lw'))->with("lastwordupdated", "Last word updated Successfully"); 
     } 
     } 
 

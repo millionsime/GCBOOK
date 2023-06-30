@@ -73,7 +73,9 @@
     <div class="card-body p-0 m-2">
         <h3> Suggestions</h3>
         <div class="ml-2">
-            <span class="ml-2 mr-2" onclick="myFunction('{{$prelast->lastword}}')" style="cursor: pointer;" >{{ $prelast->lastword }}</span>
+            @foreach($prelast as $prelastword)
+            <span class="ml-2 mr-2" onclick="myFunction('{{$prelastword->lastword}}')" style="cursor: pointer;" >{{ $prelastword->lastword}}</span>
+            @endforeach
         </div>
 <script>
 function myFunction(values) {
