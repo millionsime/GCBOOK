@@ -13,6 +13,12 @@ class GcBook extends Model
 
     protected $fillable = ['department_id','user_id', 'status'];
 
+    public function department(){
+        return $this->hasOne(Department::class, 'id','department_id');
+    }
+    public function realuser(){
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
     public static function boot()
     {
         parent::boot();

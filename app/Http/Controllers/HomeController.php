@@ -45,7 +45,13 @@ class HomeController extends Controller
         
         $totalExams = Exam::all()->where('teacher_id', Auth::user()->id)->count();
         $totalQuestion = Question::all()->where('teacher_id', Auth::user()->id)->count();
-        
+        $totalgcbookrequest = GCBook::all()->where('status', '=',  0)->count();
+        $totalapproved = GcBook::all()->where('status', '!=', 0)->count();
+        //$repapprequest = GcBook::where('status', '=', 1)->orwhere('status', '=', 2)->get();
+        $totalsstud = GcBook::all()->count();
+        $totaladrequest = GcBook::all()->where('status','=',1)->count();
+        $totaladapprrequest = GCBook::all()->where('status', '=', 2)->count();
+        $totalpay = $totaladapprrequest * 400;
       
         // $takenExamInfo = Exam::where('id', $takenExam->exam_id)->get();
         //   dd($takenExamInfo);
@@ -65,17 +71,11 @@ class HomeController extends Controller
              $changepass = " ";
         }
 
-
-        if(Auth::user()->isStudent()){
+        if(Auth::user()->isStudent() || Auth::user()->isTeacher()){
         $lastword =Lastword::where('user_id', Auth::user()->id)->first();
         $gcbook_check= GCBook::where('user_id', Auth::user()->id)->exists();
+        $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();  
         
-    
-          $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();  
-        
-
-        
-
         $examInfo= Exam::all()->where('department_id', Auth::user()->dept_id);    
         $ex   = Exam::where('department_id', Auth::user()->dept_id)->first();
         $takenExamStat=Result::where('user_id', Auth::User()->id)->where('question_id', $ex->id)->exists();
@@ -88,10 +88,10 @@ class HomeController extends Controller
                               Join topics topic ON topic.id = attendencs.topic_id 
                               Where attendencs.student_id = '$student_id' 
                               and exam.id not in (SELECT exam_id FROM marks where student_id = '$student_id' )");
-                                 return view('home', compact('gcbook_check','lastword','gcbook_check_stat','candidates','result','takenExam','takenExamStat','examInfo','totalQuestion','qst_id','questions','totalExams', 'users', 'quizzes', 'average', 'topics', 'exams','students'));
+                                 return view('home', compact('totalsstud','totalapproved','totalgcbookrequest','gcbook_check','lastword','gcbook_check_stat','candidates','result','takenExam','takenExamStat','examInfo','totalQuestion','qst_id','questions','totalExams', 'users', 'quizzes', 'average', 'topics', 'exams','students'));
    
         }
 
-        return view('home', compact('changepass','candidates','totalQuestion','qst_id','questions','totalExams', 'users', 'quizzes', 'average', 'topics', 'exams','students'));
+        return view('home', compact('totalpay','totaladrequest','totaladapprrequest','totalsstud','changepass','candidates','totalQuestion','qst_id','questions','totalExams', 'users', 'quizzes', 'average', 'topics', 'exams','students'));
     }
 }

@@ -8,6 +8,7 @@ use Auth;
 use App\GcBook;
 use App\Lastword;
 use App\Prelastword;
+use App\Department;
 
 class GcBookController extends Controller
 {
@@ -92,7 +93,7 @@ class GcBookController extends Controller
        $lastword->save();
         $lastword_check =Lastword::where('user_id', Auth::user()->id)->exists();
         $lw =Lastword::where('user_id', Auth::user()->id)->first();
-        return view('gcbooks.lastword', compact('gcbook_check_stat', 'lastword_check', 'lw'))->with("lastwordsent", "Last word recorded Successfully"); 
+        return view('gcbooks.lastword', compact('prelast','gcbook_check_stat', 'lastword_check', 'lw'))->with("lastwordsent", "Last word recorded Successfully"); 
     }
     
     }
@@ -107,5 +108,35 @@ class GcBookController extends Controller
         $lastword_check =Lastword::where('user_id', Auth::user()->id)->exists();
         return view('gcbooks.lastword', compact('prelast','gcbook_check_stat', 'lastword_check','lw'))->with("lastwordupdated", "Last word updated Successfully"); 
     } 
+
+    public function viewrequest(Request $request){
+        $studrequest = GcBook::where('status', '=', 0)->orwhere('status', '=', 1)->get();
+        $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();
+        return view('reppages.view_request', compact('studrequest', 'gcbook_check_stat'));
+    }
+
+    public function adminviewrequest(Request $request){
+        $repapprequest = GcBook::where('status', '=', 1)->orwhere('status', '=', 2)->get();
+        return view('reppages.adminview_request', compact('repapprequest'));
+    }
+    public function repupdate(Request $request, $id)
+    {
+        $requests = GcBook::findOrFail($id);
+        $status = 1;
+        $requests->status = $status;
+        $requests->save();
+        $studrequest = GcBook::all();
+        $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();
+        return redirect()->route('viewrequest', compact('studrequest', 'gcbook_check_stat'))->with("message", "request approved succesfully!");
+    }
+    public function adminupdate(Request $request, $id)
+    {
+        $requests = GcBook::findOrFail($id);
+        $status = 2;
+        $requests->status = $status;
+        $requests->save();
+        $studrequest = GcBook::all();
+        return redirect()->route('adminviewrequest', compact('studrequest'))->with("message", "request approved succesfully!");
+    }
     } 
 

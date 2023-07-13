@@ -8,15 +8,22 @@
       <div class="full-screen -margin-bottom middle padding padding-top-tablet">
         <div class="row max-width-l">
           <div class="col-one-half middle">
+            <div class="mb-5">
+            <a href="www.mwu.edu.et">
               <p style="text-align:center;">
                   <img class="rounded center" src="{{ asset('opal/media/favicon.png') }}" 
                     style="width:128px;height:128px;" 
                      alt="Editor">
               </p>
-              <h1 class="hero">Model Exit Exam Assesment</h1>
+            </a>
+              <h1 class="hero" align="center">Congratulation!</h1>
+            </div>
+            <div class="mb-3">
+              <h1 class="hero mt-3">Wel-Come to GC Book</h1>
+              <h6 class="hero"><i>Please lognin to Request for GC Book</i></h6>
               
               <a href = "www.mwu.edu.et"><p class="lead">Madda Walabu University</p></a>
-          <a  href="{{ route('signup') }}" class="button button-primary space-top" role="button">{{ __('Register') }} </a>
+            </div>
           </div>
           <div class="col-one-half middle">
             {{-- //here --}}

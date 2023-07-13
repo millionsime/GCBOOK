@@ -99,4 +99,5 @@ class AddStud extends Model
 
         return false;
     }
+
 }

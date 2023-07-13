@@ -18,7 +18,6 @@
         <div class="panel-heading">
             @lang('quickadmin.list')
         </div>
-
         <div class="panel-body">
             <table class="table table-bordered table-striped {{ count($studs) > 0 ? 'datatable' : '' }} dt-select">
                 <thead>
@@ -37,7 +36,7 @@
                         @foreach ($studs as $users)
                             <tr data-entry-id="{{ $users->email }}">
                                   <th  style="text-align:center;"><input type="checkbox" id="select-all" ></th>
-                                <td>{{  $users->email }}</td>
+                                <td>{{ $users->email }}</td>
                                 <td>{{ $users->name }}</td>
                                 <td>{{ $users->department->title }}</td>
                                 <td>{{ $users->section }}</td>

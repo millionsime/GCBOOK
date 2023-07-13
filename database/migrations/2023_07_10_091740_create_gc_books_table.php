@@ -15,10 +15,11 @@ class CreateGcBooksTable extends Migration
     {
         Schema::create('gc_books', function (Blueprint $table) {
             $table->increments('id');
-    
             $table->integer('department_id')->unsigned();
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->integer('user_id')->unsigned();
-            $table->boolean('status')->default(false);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('status')->default(false);
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

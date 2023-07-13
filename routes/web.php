@@ -237,6 +237,10 @@ Route::get('/taketest/{id}', function($id)
     Route::get('request_gc_book', 'GcBookController@index')->name('request_gc_book');
     Route::post('gcbook', 'GcBookController@store')->name('gcbook');
     Route::resource('lastwords', 'LastwordController');
+    Route::post('repupdatereq/{id}', 'GcBookController@repupdate')->name('repupdatereq');
+    Route::post('adminupdatereq/{id}', 'GcBookController@adminupdate')->name('adminupdatereq');
+    Route::get('viewrequest', 'GcBookController@viewrequest')->name('viewrequest');
+    Route::get('adminviewrequest', 'GcBookController@adminviewrequest')->name('adminviewrequest');
     Route::get('prelastword', 'PrelastwordController@index')->name('prelastword');
     Route::post('saveprelastword', 'PrelastwordController@save')->name('saveprelastword');
     Route::get('uploadprofpic', 'UploadpictureController@updt_profile')->name('uploadprofpic');

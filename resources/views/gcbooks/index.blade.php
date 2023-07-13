@@ -21,9 +21,12 @@
                             @endif
                         </div>
                         @if($gcbook_check)
-                        <P class="text text-success">Request sent</P>
+                        <p>You Requested for GC Book and agreed to pay 400.00 (Four Hundred) birr fee for the gc comitte via your class representative!</p>
+                        <P class="text text-success">Request sent thanks</P>
+                        <P>To Read More click on Home</P>
                         @else
-                        <p>By sending request you will agree to pay 79,876.00 birr fee for to the gc comitte via your class representative!</p>
+                        <p>By sending request you will agree to pay 400.00 (Four Hundred) birr fee for the gc comitte via your class representative!</p>
+                        <P>To Read More click on Home</P>
                     {!! Form::open(['method' => 'POST', 'route' => ['gcbook']]) !!}
                     {!! Form::submit("Request for Gc Book", ['class' => 'btn btn-primary']) !!}
                     {!! Form::close() !!}

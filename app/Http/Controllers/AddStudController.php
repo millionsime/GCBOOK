@@ -77,15 +77,17 @@ class AddStudController extends Controller
         
         
     }
+
     public function show($id)
     {
+        
         $relations = [
-            'roles' => \App\Department::get()->pluck('title', 'id')->prepend('Please select', ''),
+            'roles' => Department::get()->pluck('title', 'id')->prepend('Please select', ''),
         ];
 
         $user = AddStud::findOrFail($id);
 
-        return view('add_stud.show', compact('user') + $relations);
+        return view('add_stud.show', compact('user'));
     } 
     public function edit($id)
     {

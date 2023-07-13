@@ -7,7 +7,6 @@
         <div class="panel-heading">
             @lang('quickadmin.view')
         </div>
-        
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">

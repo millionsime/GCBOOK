@@ -12,6 +12,11 @@
 <!-- Divider -->
 <hr class="sidebar-divider">
 <li class="nav-item">
+    <a class="nav-link" href="{{ route('home') }}">
+        <i class="fas fa-fw fa-home"></i>
+        <span>Home</span></a>
+</li>
+<li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitie"
           aria-expanded="true" aria-controls="collapseUtilitie">
           <i class="fas fa-user-graduate"></i>
@@ -22,12 +27,12 @@
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Manage Your GC Book:</h6>
             @if($gcbook_check_stat)
-            @if($gcbook_check_stat->status==0)
+            @if($gcbook_check_stat->status==0 || $gcbook_check_stat->status==1 )
               <a class="collapse-item" href="{{ route('request_gc_book') }}">Request</a>
             @else 
    
             <a class="collapse-item" href="{{ route('uploadphoto') }}">Upload Photo</a>
-            <a class="collapse-item" href={{ route('addlastword', [$gcbook_check_stat->user_id]) }}>Add Last Word</a>
+            <a class="collapse-item" href="{{ route('addlastword', [$gcbook_check_stat->user_id]) }}">Add Last Word</a>
             <a class="collapse-item" href="#">View GC Book</a>
            @endif
            @else
