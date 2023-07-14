@@ -9,20 +9,14 @@
         <div class="row max-width-l">
           <div class="col-one-half middle">
             <div class="mb-5">
-            <a href="www.mwu.edu.et">
-              <p style="text-align:center;">
-                  <img class="rounded center" src="{{ asset('opal/media/favicon.png') }}" 
-                    style="width:128px;height:128px;" 
-                     alt="Editor">
-              </p>
-            </a>
+           
               <h1 class="hero" align="center">Congratulation!</h1>
             </div>
             <div class="mb-3">
               <h1 class="hero mt-3">Wel-Come to GC Book</h1>
-              <h6 class="hero"><i>Please lognin to Request for GC Book</i></h6>
+              <h6 class="hero" align="center"><b>Please login to Request for GC Book</b></h6>
               
-              <a href = "www.mwu.edu.et"><p class="lead">Madda Walabu University</p></a>
+    
             </div>
           </div>
           <div class="col-one-half middle">
@@ -83,11 +77,7 @@
             {{-- the middle one --}}
             {{-- <img class="rounded shadow-l" src="{{ asset('opal/media/bg/mwu.jpg') }}" srcset="{{ asset('opal/media/bg/mwu.jpg 1x, opal/media/bg/mwu@2x.jpg 2x')}}" alt="Editor"> --}}
           </div>
-          <div class="col-one-half middle">
-            <h3>Prepared By</h3>
-            <h5>Computing College</h5>
-            {{-- <img class="rounded shadow-l" src="{{ asset('opal/media/bg/sanate.jpg') }}" srcset="{{ asset('opal/media/bg/sanate.jpg 1x, opal/media/bg/sanate@2x.jpg 2x')}}" alt="Editor"> --}}
-          </div>
+
         </div>
       </div>
     </section>

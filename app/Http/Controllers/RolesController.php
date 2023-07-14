@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\AddStud;
 use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRolesRequest;
 use App\Http\Requests\UpdateRolesRequest;
+use App\User;
+use App\Department;
 
 class RolesController extends Controller
 {
@@ -123,4 +126,30 @@ class RolesController extends Controller
         }
     }
 
+    public function roleupdate(Request $request){
+        $id = $request->dept;
+        $stud = User::where('role_id', '=', '2')->where('dept_id', '=', $id)->get();
+        return view('roles.roleupdate', compact('stud'));
+    }
+
+    public function rolechange(Request $request, $id){
+        $role_id = 3;
+        $dept_id = $request->dept_id;
+        $check = User::where('role_id', '=', $role_id)->where('dept_id', '=', $dept_id)->count();
+        if($check > 0){
+            $stud = User::where('role_id', '=', '2')->get();
+            return redirect()->route('deptselect', compact('stud'))->with("message", "Rep assigned previouly!");
+        }
+        else{
+            $requests = User::findOrFail($id);
+            $requests->role_id = $role_id;
+            $requests->save();
+            $stud = User::where('role_id', '=', '2')->get();
+            return redirect()->route('deptselect', compact('stud'))->with("message", "Rep assigned succesfully!");
+         }
+    }
+    public function selectdept(Request $request){
+        $dept = Department::all();
+        return view('roles.roleselectdept', compact('dept'));
+    }
 }

@@ -12,7 +12,7 @@ use App\User;
 use App\Result;
 use App\Lastword;
 use App\Question;
-use App\GCBook;
+use App\GcBook;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -45,12 +45,12 @@ class HomeController extends Controller
         
         $totalExams = Exam::all()->where('teacher_id', Auth::user()->id)->count();
         $totalQuestion = Question::all()->where('teacher_id', Auth::user()->id)->count();
-        $totalgcbookrequest = GCBook::all()->where('status', '=',  0)->count();
-        $totalapproved = GcBook::all()->where('status', '!=', 0)->count();
+        $totalgcbookrequest = GcBook::all()->where('status', '=',  0)->where('department_id', Auth::user()->dept_id)->count();
+        $totalapproved = GcBook::all()->where('status', '!=', 0)->where('department_id', Auth::user()->dept_id)->count();
         //$repapprequest = GcBook::where('status', '=', 1)->orwhere('status', '=', 2)->get();
-        $totalsstud = GcBook::all()->count();
+        $totalsstud = GcBook::all()->where('department_id', Auth::user()->dept_id)->count();
         $totaladrequest = GcBook::all()->where('status','=',1)->count();
-        $totaladapprrequest = GCBook::all()->where('status', '=', 2)->count();
+        $totaladapprrequest = GcBook::all()->where('status', '=', 2)->count();
         $totalpay = $totaladapprrequest * 400;
       
         // $takenExamInfo = Exam::where('id', $takenExam->exam_id)->get();
@@ -73,8 +73,8 @@ class HomeController extends Controller
 
         if(Auth::user()->isStudent() || Auth::user()->isTeacher()){
         $lastword =Lastword::where('user_id', Auth::user()->id)->first();
-        $gcbook_check= GCBook::where('user_id', Auth::user()->id)->exists();
-        $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();  
+        $gcbook_check= GcBook::where('user_id', Auth::user()->id)->exists();
+        $gcbook_check_stat= GcBook::where('user_id', Auth::user()->id)->first();  
         
         $examInfo= Exam::all()->where('department_id', Auth::user()->dept_id);    
         $ex   = Exam::where('department_id', Auth::user()->dept_id)->first();

@@ -110,7 +110,7 @@ class GcBookController extends Controller
     } 
 
     public function viewrequest(Request $request){
-        $studrequest = GcBook::where('status', '=', 0)->orwhere('status', '=', 1)->get();
+        $studrequest = GcBook::where('status', '=', 0)->orwhere('status', '=', 1)->where('department_id', Auth::user()->dept_id)->get();
         $gcbook_check_stat= GCBook::where('user_id', Auth::user()->id)->first();
         return view('reppages.view_request', compact('studrequest', 'gcbook_check_stat'));
     }

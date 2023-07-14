@@ -83,55 +83,51 @@
 
 
                 @if(Auth::user()->isStudent())
-                
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col mb-5" >
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="mb-1 center">
-                                                    <h1>GC Book</h1>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <h1>GC Book &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-info text-red-300"></i>
+                                            </h1>
+                                            </div>
                                                     <p align="justify">If you apply for GC Book Service you will get 
                                                         two main services provided in the form of 
                                                         Web-site and Mobile application
                                                     </p> 
-                                                </div> 
-                                            </div>
+                                        
+                                            <p class="text text-danger bg-gray" align="justify">Please click on GC Book menu and click on request to start your GC book request</p>
                                         </div>
-                                    <div> 
-                                        <p class="text text-danger bg-gray" align="justify">Please click on GC Book menu and click on request to start your GC book request</p>   
-                                </div>
                             </div>
                         </div>
-                    </div> 
-                    <hr>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col mb-5" >
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-5">
-                                                <div class="mb-1 center">
-                                                    <h1>Videos</h1>
+                    </div>
+                </div> 
+                <div class="col col-md-6 mb-4">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        <h1>Videos</h1>
                                                     <div> 
                                                         Mobile App Video
                                                     </div>
                                                     <div> 
                                                         Web-site Video
-                                                    </div>  
-                                                </div> 
-                                            </div>
-                                        </div>
-                                    <div>  
+                                                    </div> 
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-video fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <hr>                     
-              
+                </div>
                 @endif 
 
 
@@ -169,14 +165,14 @@
                                             {{ $totalapproved }}
                                         </div>
                                     </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info  shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -193,7 +189,6 @@
                                 </div>
                             </div>
                         </div>
-
                 @endif
             </div>
         </div>

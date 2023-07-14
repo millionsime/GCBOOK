@@ -224,7 +224,10 @@ Route::get('/taketest/{id}', function($id)
 
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('editexam/{id}', 'ExamsController@edit')->name('editexam');
-
+    
+    Route::post('updaterole', 'RolesController@roleupdate')->name('updaterole');
+    Route::get('deptselect', 'RolesController@selectdept')->name('deptselect');
+    Route::post('updatechange/{id}', 'RolesController@rolechange')->name('updatechange');
     Route::resource('welcome', 'WelcomeController');
     Route::resource('products', 'ProductController');
     Route::resource('tests', 'TestsController');
